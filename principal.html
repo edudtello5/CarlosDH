@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carlos Díaz Herrera</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root{
+      --accent: #568CA4;
+    }
+
+    /* Contenedor principal */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: url('recursos/portada.gif') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Monaco, monospace;
+      display: flex;
+      flex-direction: column;
+      color: var(--accent);
+    }
+
+    /* Header en la parte superior */
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 150px;
+      padding-bottom: 10px;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 5em;
+      color: #568CA4;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      margin: 0;
+    }
+
+    /* Main centra los botones verticalmente */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding-bottom: 70px;
+    }
+
+    /* Botones generales */
+    .btn-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-container img {
+      width: 28vw;
+      max-width: 350px;
+      min-width: 200px;
+      height: auto;
+      display: block;
+    }
+
+    .btn-container h2 {
+      position: absolute;
+      margin: 0;
+      font-size: 2em;
+      color: var(--accent);
+      text-align: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .btn-container:hover {
+      transform: scale(1.06);
+    }
+
+    /* Botón de contacto especial */
+    .btn-contact img {
+      width: 550px;
+      height: 75px;
+      object-fit: fill;
+      max-width: none;
+    }
+
+    .btn-contact {
+      position: relative;
+    }
+
+    .btn-contact::after {
+      content: "Enviar correo";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .btn-contact:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-12px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 { font-size: 2em; }
+      .btn-container img { width: 40vw; max-width: 240px; }
+      .btn-contact img { width: 320px; height: 80px; }
+      .btn-container h2 { font-size: 1.2em; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Carlos D.H</h1>
+  </header>
+
+  <main>
+    <a href="#" class="btn-container" onclick="navigate('yo.html'); return false;">
+      <img src="recursos/btn.png" alt="Botón About me">
+      <h2>About me</h2>
+    </a>
+
+    <a href="#" class="btn-container" onclick="navigate('work.html'); return false;">
+      <img src="recursos/btn.png" alt="Botón My work">
+      <h2>My work</h2>
+    </a>
+
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=carlosdhanimacion@gmail.com"
+       class="btn-container btn-contact"
+       target="_blank">
+      <img src="recursos/btn.png" alt="Botón Contact">
+      <h2>carlosdhanimacion@gmail.com</h2>
+    </a>
+    <div class="btn-container btn-contact">
+      <img src="recursos/btn.png" alt="Botón My work">
+      <h2>tfno: 647727976</h2>
+    </div>
+  </main>
+
+  <script>
+    // Navegación robusta hacia el padre
+    function navigate(page) {
+      try {
+        if (parent && typeof parent.loadPage === 'function') {
+          parent.loadPage(page);
+          return;
+        }
+      } catch (err) {
+        console.warn('parent.loadPage no accesible:', err);
+      }
+      // fallback: pedir al padre por postMessage
+      parent.postMessage({ type: 'loadPage', page: page }, '*');
+    }
+
+    // Pedir al padre reproducir música si el primer clic ocurre dentro del iframe
+    document.addEventListener('click', () => {
+      try {
+        parent.postMessage({ type: 'play-music' }, '*');
+      } catch (err) {
+        console.warn('No se pudo enviar postMessage play-music:', err);
+      }
+    }, { once: true });
+  </script>
+</body>
+</html>

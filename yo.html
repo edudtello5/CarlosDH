@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sobre mí - Carlos Díaz Herrera</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: url('recursos/portada.gif') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Monaco, monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      position: relative;
+    }
+
+    /* Contenedor principal */
+    .about-wrapper {
+      width: 80vw;
+      max-width: 800px;
+      background: rgba(30,30,30,0.7);
+      border-radius: 24px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+      padding: 40px 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative; /* necesario para que la flecha se posicione dentro */
+      z-index: 1;
+    }
+
+    /* Flecha de regreso ahora dentro del bloque negro */
+    .back-arrow {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-size: 2em;
+      color: #568CA4;
+      text-decoration: none;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .back-arrow:hover {
+      transform: scale(1.1);
+      background: rgba(0,0,0,0.8);
+    }
+
+    .about-title {
+      font-size: 2.5em;
+      margin-bottom: 24px;
+      font-weight: bold;
+      color: #568CA4;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+    }
+
+    .about-text {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      color: #fff;
+    }
+
+    .about-text.en {
+      font-size: 1.1em;
+      color: #eaeaea;
+      opacity: 0.85;
+    }
+
+    /* Imagen de perfil como fondo */
+    .profile-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 520px;
+      height: 700px;
+      transform: translate(-50%, -50%);
+      background: url('recursos/perfil.jpg') no-repeat center center;
+      background-size: cover;
+      opacity: 0.85;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Imagen de perfil en la esquina */
+    .profile-circle {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      border: 2px solid #fff;
+      z-index: 10002;
+      background: #222;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .about-wrapper {
+        width: 90vw;
+        padding: 24px;
+      }
+      .about-title {
+        font-size: 1.8em;
+      }
+      .about-text {
+        font-size: 1em;
+      }
+      .about-text.en {
+        font-size: 0.95em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-bg"></div>
+  <div class="about-wrapper">
+    <a href="#" class="back-arrow" onclick="parent.loadPage('principal.html')" title="Volver a principal">&#8592;</a>
+    <div class="about-title">Sobre mí</div>
+    <div class="about-text">
+      Siempre quise ser ilustrador, y nunca se llega a serlo completamente. Es por esto que amo este trabajo: cada día se aprende el doble que el anterior, es un aprendizaje constante. No me refiero sólo a dibujar, me refiero a mirar y ver.
+    </div>
+    <div class="about-text en">
+      I always wanted to be an Illustrator, and you never come to be one completely. That is why I love this job:<br>
+      each day you learn double of the previous day, it is constant learning. I’m not referring only to drawing, but to looking and seeing.
+    </div>
+  </div>
+</body>
+</html>
