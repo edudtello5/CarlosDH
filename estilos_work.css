@@ -1,0 +1,11 @@
+.btn-left {
+  align-self: flex-start;
+  margin-left: 100px;
+}
+.btn-center {
+  align-self: center;
+}
+.btn-right {
+  align-self: flex-end;
+  margin-right: 100px;
+}

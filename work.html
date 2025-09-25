@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>My Work - Carlos Díaz Herrera</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: url('recursos/press.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Monaco, monospace;
+    }
+
+    /* Botón volver */
+    .back-arrow {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      font-size: 2.5em;
+      color: #fff;
+      text-decoration: none;
+      background: rgba(60,60,60,0.7);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10001;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: background 0.2s;
+    }
+    .back-arrow:hover {
+      background: rgba(30,30,30,0.9);
+    }
+
+    /* Estilo botones */
+    .btn-container {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #568CA4;
+      font-weight: bold;
+      transition: transform 0.3s;
+    }
+    .btn-container img {
+      width: 28vw;          /* 28% del ancho de la pantalla */
+      max-width: 350px;     /* no más grande que 350px */
+      min-width: 200px;     /* no más pequeño que 200px */
+      height: auto;
+      display: block;
+    }
+    .btn-container h2 {
+      position: absolute;
+      margin: 0;
+      font-size: 2em;
+      color: #568CA4;
+      pointer-events: none;
+      text-align: center;
+    }
+    .btn-container:hover {
+      transform: scale(1.1);
+    }
+
+    /* Posiciones en escalera */
+    .btn-press { top: 12%; left: 12%; }
+    .btn-textbooks {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn-container:hover {
+  transform: scale(1.1);
+}
+
+/* Específico para textbooks → combina scale + translate */
+.btn-textbooks:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+    .btn-animation { bottom: 12%; right: 12%; }
+
+    /* Responsive para móviles */
+    @media (max-width: 768px) {
+      .btn-container img {
+        width: 40vw;     /* más grandes en pantallas pequeñas */
+        max-width: 240px;
+      }
+      .btn-container h2 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+ <a href="#" class="back-arrow" onclick="parent.loadPage('principal.html')" title="Volver a principal">&#8592;</a>
+
+  <a href="#" class="btn-container btn-press" onclick="parent.loadPage('press.html')">
+  <img src="recursos/btn.png" alt="Botón Press">
+  <h2>Press</h2>
+</a>
+
+<a href="#" class="btn-container btn-textbooks" onclick="parent.loadPage('textbooks.html')">
+  <img src="recursos/btn.png" alt="Botón Textbooks">
+  <h2>Textbooks</h2>
+</a>
+
+<a href="#" class="btn-container btn-animation" onclick="parent.loadPage('animation.html')">
+  <img src="recursos/btn.png" alt="Botón Animation">
+  <h2>Animation</h2>
+</a>
+</body>
+</html>

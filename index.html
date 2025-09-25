@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>layout - padre</title>
+  <style>
+    body { margin:0; padding:0; height:100vh; overflow:hidden; background:#000; }
+    iframe { width:100%; height:100%; border: none; display:block; }
+    audio { display: none; }
+
+    /* Botón mute */
+    #mute-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 20;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    #mute-btn:hover {
+      background: rgba(86,140,164,0.8);
+    }
+  </style>
+</head>
+<body>
+  <!-- audio -->
+  <audio id="bg-music" loop>
+    <source src="recursos/debussy.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+
+  <!-- botón mute -->
+  <button id="mute-btn" title="Mute/Unmute">🔊</button>
+
+  <!-- iframe -->
+  <iframe id="content-frame" src="principal.html"></iframe>
+
+  <script>
+    const music = document.getElementById('bg-music');
+    const muteBtn = document.getElementById('mute-btn');
+
+    function tryPlay() {
+      if (music.paused) {
+        music.play().catch(err => console.log('No se pudo reproducir:', err));
+      }
+    }
+
+    // Reproducir al primer clic en el padre
+    document.addEventListener('click', tryPlay, { once: true });
+
+    // Función para cambiar el iframe
+    function loadPage(page) {
+      document.getElementById('content-frame').src = page;
+      console.log('loadPage ->', page);
+    }
+    window.loadPage = loadPage;
+
+    // Escuchar mensajes desde el iframe
+    window.addEventListener('message', (e) => {
+      const msg = e.data;
+      if (typeof msg === 'string') {
+        if (msg === 'play-music') tryPlay();
+      } else if (msg && typeof msg === 'object') {
+        if (msg.type === 'play-music') tryPlay();
+        if (msg.type === 'loadPage' && typeof msg.page === 'string') {
+          loadPage(msg.page);
+        }
+      }
+    });
+
+    // Mute/unmute
+    muteBtn.addEventListener('click', () => {
+      music.muted = !music.muted;
+      muteBtn.textContent = music.muted ? '🔇' : '🔊';
+    });
+  </script>
+</body>
+</html>
